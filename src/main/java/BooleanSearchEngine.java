@@ -42,6 +42,11 @@ public class BooleanSearchEngine implements SearchEngine {
                 }
             }
         }
+        for (List<PageEntry> list:
+        index.values()){
+                Collections.sort(list);
+                Collections.reverse(list);
+        }
     }
 
     public String listToJson(List<PageEntry> list) {
@@ -55,12 +60,6 @@ public class BooleanSearchEngine implements SearchEngine {
     @Override
     public List<PageEntry> search(String word) {
         String lowerCaseWord = word.toLowerCase();
-        try {
-            Collections.sort(index.get(lowerCaseWord));
-            Collections.reverse(index.get(lowerCaseWord));
-        } catch (NullPointerException e) {
-            return Collections.emptyList();
-        }
         return index.get(lowerCaseWord);
     }
 }
